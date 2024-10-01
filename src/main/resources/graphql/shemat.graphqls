@@ -1,0 +1,55 @@
+type Query {
+    getAllTeacher: [Teacher]
+}
+type Mutation{
+    createTeacher(teacher:TeacherInput):Teacher
+}
+
+type Teacher {
+    id: Int
+    name: String
+    firstName: String
+    old: Int
+    department: Department!
+}
+
+input TeacherInput {
+    id: Int
+    name: String
+    firstName: String
+    old: Int
+    department: Department!
+}
+
+enum Department {
+    Department1,
+    Department2,
+    Department3,
+    Department4,
+    Department5,
+    Department6,
+    Department7,
+    Department8
+
+}
+
+enum SEMESTER {
+    SEMESTER1,
+    SEMESTER2,
+    SEMESTER3,
+    SEMESTER4,
+    SEMESTER5,
+    SEMESTER6
+
+}
+
+enum CreditPoint {
+    FIVE,
+    SEMESTER2,
+    SEMESTER3,
+    SEMESTER4,
+    SEMESTER5,
+    SEMESTER6
+
+}
+

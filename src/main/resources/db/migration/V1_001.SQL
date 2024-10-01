@@ -1,0 +1,7 @@
+CREATE TABLE IF NOT EXISTS teacher (
+id INTEGER NOT NULL AUTO_INCREMENT,
+name varchar(255) NOT NULL,
+first_name varchar(255) NOT NULL,
+old INTEGER NOT NULL,
+PRIMARY KEY (id)
+ )

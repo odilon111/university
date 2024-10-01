@@ -1,0 +1,9 @@
+owl university faculty list
+1; Wolf;Stephan;60
+2; Hessen;Paul; 53
+3; Wrenger;Bruker;60
+4; Mass;Elgo; 58
+5; Rubart;Jessica;50
+6; Wross;Engry;38
+7; Phamar;toton;58
+8; Jäger;Frau; 65
