@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @Table(name = "lecture")
 public class Lecture {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private long id;
     @Column(name = "name")
@@ -20,9 +20,8 @@ public class Lecture {
     @ManyToOne
     @JoinColumn(name = "teacher_id")
     private Teacher teacher;
-    @Enumerated(EnumType.ORDINAL)
     @Column(name = "creditPoint")
-    private CreditPoint creditPoint;
+    private int creditPoint;
     @Column(name = "semester")
     @Enumerated(EnumType.STRING)
     private Semester semester;

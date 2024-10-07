@@ -1,5 +1,6 @@
 package grapheQL.example.universityGrapheQL.entitiers;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -12,6 +13,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 @Table(name ="teacher")
+@JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class Teacher {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
