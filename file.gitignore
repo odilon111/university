@@ -1,0 +1,21 @@
+# Ignoriere alle .log-Dateien
+*.log
+
+# Ignoriere den Ordner node_modules/
+node_modules/
+
+# Ignoriere temporäre Dateien und Ordner von Betriebssystemen
+.DS_Store
+Thumbs.db
+
+# Ignoriere Build-Ordner
+build/
+dist/
+
+# Ignoriere persönliche Umgebungsdateien
+.env
+.env.local
+
+# Ignoriere IDE-spezifische Dateien
+.vscode/
+.idea/
