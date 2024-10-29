@@ -1,0 +1,1 @@
+ALTER TABLE university MODIFY COLUMN teacher_id INT;

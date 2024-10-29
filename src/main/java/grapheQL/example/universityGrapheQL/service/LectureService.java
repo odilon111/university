@@ -1,6 +1,7 @@
 package grapheQL.example.universityGrapheQL.service;
 
 import grapheQL.example.universityGrapheQL.entitiers.Lecture;
+import grapheQL.example.universityGrapheQL.entitiers.Semester;
 import grapheQL.example.universityGrapheQL.entitiers.Teacher;
 import grapheQL.example.universityGrapheQL.repository.LectureRepository;
 import grapheQL.example.universityGrapheQL.repository.TeacherRepository;
@@ -33,5 +34,20 @@ public class LectureService {
 
     public List<Lecture> findAllLecture(){
         return lectureRepository.findAll();
+    }
+
+    public List<Lecture> getAllLectureBySemester(Semester semester){
+        if (semester.equals(null)){
+            throw new RuntimeException("lecture not found with semester: " + semester);
+        }
+        return lectureRepository.findAllLectureBySemester(semester);
+    }
+
+    public List<Lecture> getAllLectureByTeacher(Teacher teacher){
+        int teacherId = teacher.getId();
+        if (teacher.getId()<=0){
+            throw new RuntimeException("lecture not found with semester: " + teacher);
+        }
+        return lectureRepository.findAllLectureByTeacher(teacher);
     }
 }

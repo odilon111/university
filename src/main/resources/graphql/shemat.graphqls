@@ -1,20 +1,28 @@
-#type Query {
-#    getAllTeacher: [Teacher]
-##}
+type Query {
+   getAllTeacher: [Teacher]
+}
 #type Mutation{
 #    createTeacher(teacher:TeacherInput):Teacher
 #}
 
-type Query {
-    findAllLecture: [Lecture]
-}
-type Mutation{
-    createLecture(teacherId: Int, lecture:LectureInput):Lecture
-}
+#type Query {
+  #  getAllLectureByTeacher(teacher: TeacherInput): [Lecture]
+#}
+#type Mutation{
+  #  createLecture(teacherId: Int, lecture:LectureInput):Lecture
+#}
 
 #type Query{
 #    getTeacherById(teacherId :Int):Teacher
 #}
+
+#type Query{
+   # findAllUniversity: [University]
+#}
+
+type Mutation {
+    createUniversity(university: UniversityInput): University
+}
 
 type Teacher {
     id: Int
@@ -71,6 +79,18 @@ enum Semester {
     SEMESTER5,
     SEMESTER6
 
+}
+
+type University{
+    id : ID
+    name: String
+    teachers:[Teacher]
+}
+
+ input UniversityInput{
+    id : ID
+    name: String
+    teachers:[TeacherInput]
 }
 
 

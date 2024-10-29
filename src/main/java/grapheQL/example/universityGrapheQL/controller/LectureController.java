@@ -1,6 +1,7 @@
 package grapheQL.example.universityGrapheQL.controller;
 
 import grapheQL.example.universityGrapheQL.entitiers.Lecture;
+import grapheQL.example.universityGrapheQL.entitiers.Semester;
 import grapheQL.example.universityGrapheQL.entitiers.Teacher;
 import grapheQL.example.universityGrapheQL.service.LectureService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,14 +22,20 @@ public class LectureController {
         return lectureService.findAllLecture();
     }
 
-    public LectureController(LectureService lectureService) {
-        this.lectureService = lectureService;
-    }
-
     @MutationMapping
     public Lecture createLecture(@Argument int teacherId, @Argument Lecture lecture){
 
         return lectureService.createLecture(teacherId,lecture);
 
+    }
+
+    @QueryMapping
+    public List<Lecture> getAllLectureBySemester(@Argument Semester semester){
+        return lectureService.getAllLectureBySemester(semester);
+    }
+
+    @QueryMapping
+    public List<Lecture> getAllLectureByTeacher(@Argument Teacher teacher){
+        return lectureService.getAllLectureByTeacher(teacher);
     }
 }
