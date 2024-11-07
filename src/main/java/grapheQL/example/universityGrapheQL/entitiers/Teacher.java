@@ -28,4 +28,6 @@ public class Teacher {
     @Enumerated(EnumType.STRING)
     @Column(name = "department")
     private Department department;
+//    @Column(name = "university_id")
+//    private long universityId;
 }

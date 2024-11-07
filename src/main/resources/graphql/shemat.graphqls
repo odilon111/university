@@ -1,6 +1,6 @@
-type Query {
-   getAllTeacher: [Teacher]
-}
+#type Query {
+  # getAllTeacher: [Teacher]
+#}
 #type Mutation{
 #    createTeacher(teacher:TeacherInput):Teacher
 #}
@@ -16,9 +16,9 @@ type Query {
 #    getTeacherById(teacherId :Int):Teacher
 #}
 
-#type Query{
-   # findAllUniversity: [University]
-#}
+type Query{
+    findAllUniversity: [University]
+}
 
 type Mutation {
     createUniversity(university: UniversityInput): University

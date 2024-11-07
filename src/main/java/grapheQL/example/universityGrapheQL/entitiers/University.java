@@ -22,7 +22,7 @@ public class University {
     private  long id;
     @Column(name = "name")
     private String name;
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "teacher_id")
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
+    @JoinColumn(name = "university_id") // Creates foreign key in Teacher table
     private List<Teacher> teachers = new ArrayList<>();
 }
