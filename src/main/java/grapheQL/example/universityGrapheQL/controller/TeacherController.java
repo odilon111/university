@@ -9,20 +9,24 @@ import org.springframework.graphql.data.method.annotation.Argument;
 import org.springframework.graphql.data.method.annotation.MutationMapping;
 import org.springframework.graphql.data.method.annotation.QueryMapping;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.function.Consumer;
+import java.util.function.Function;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 
 @Slf4j
-@Controller
+@RestController
+@RequestMapping("/teacher")
 public class TeacherController {
     @Autowired
     private TeacherRepository teacherRepository;
@@ -31,20 +35,19 @@ public class TeacherController {
         this.teacherRepository = teacherRepository;
     }
 
-    @QueryMapping
-    public List<Teacher> getAllTeacher(){
+    @GetMapping
+    public List<Teacher> getAllTeacher() {
         return teacherRepository.findAll();
     }
 
-    @MutationMapping
-    public Teacher createTeacher(@Argument Teacher teacher){
+    @PostMapping
+    public Teacher createTeacher(@RequestBody Teacher teacher) {
         return teacherRepository.saveAndFlush(teacher);
 
     }
 
-    @QueryMapping
-    //@GetMapping("/employees/{teacherId}")
-    public Teacher getTeacherById(@Argument int teacherId){
+    @GetMapping("/employees/{teacherId}")
+    public Teacher getTeacherById(@Argument int teacherId) {
         if (teacherId <= 0) {  // Überprüfung auf ungültige Werte
             throw new IllegalArgumentException("Invalid teacher ID: " + teacherId);
         }
@@ -56,17 +59,17 @@ public class TeacherController {
 
 
     public void loadData() throws IOException {
-       // List<Teacher> teachers = new ArrayList<>();
-        Path sourceOfTeacherData  = Paths.get
+        // List<Teacher> teachers = new ArrayList<>();
+        Path sourceOfTeacherData = Paths.get
                 ("F:\\Dokumente\\grapheQL\\universityGrapheQL\\src\\main\\resources\\university\\dbteacher\\programmationLanguage.txt");
         List<String> teachingLine = Files.readAllLines(sourceOfTeacherData);
-        for (int i=1; i<teachingLine.size()-1;i++){
+        for (int i = 1; i < teachingLine.size() - 1; i++) {
             String teacherLine = teachingLine.get(i);
             String[] teacherInfo = teacherLine.split(";");
-            int teacherId =Integer.parseInt(teacherInfo[0].replaceAll("\\s",""));
+            int teacherId = Integer.parseInt(teacherInfo[0].replaceAll("\\s", ""));
             String teacherName = teacherInfo[1];
             String teacherFirstName = teacherInfo[2];
-            int teacherOld = Integer.parseInt(teacherInfo[3].replaceAll("\\s",""));
+            int teacherOld = Integer.parseInt(teacherInfo[3].replaceAll("\\s", ""));
             String teacherDepartmentColumn = teacherInfo[4];
             Department teacherDepartment = Department.valueOf(teacherDepartmentColumn);
 
@@ -79,20 +82,26 @@ public class TeacherController {
 
 
                     )
-                              .build();
+                    .build();
 
-         teacherRepository.save(teachers);
+            teacherRepository.save(teachers);
         }
 
 
     }
-    public static void main(String[] args){
 
-        StringFunction exclaim = (s) -> s + "!";
-        System.out.println(exclaim);
+    public static void main(String[] args) {
+        List<String> names = Arrays.asList("John", "Jane", "Jack", "Jill");
+
+        Consumer<String> printName = name -> System.out.println(name);
+
+        names.forEach(printName);
     }
 
 }
-interface StringFunction {
-    String run(String str);
+
+
+
+interface MathOperation  {
+   String addition(String a, String b);
 }

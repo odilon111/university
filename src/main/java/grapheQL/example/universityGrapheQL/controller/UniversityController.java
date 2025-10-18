@@ -9,22 +9,23 @@ import org.springframework.graphql.data.method.annotation.Argument;
 import org.springframework.graphql.data.method.annotation.MutationMapping;
 import org.springframework.graphql.data.method.annotation.QueryMapping;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Controller
-
+@RestController
+@RequestMapping("/university")
 public class UniversityController {
     @Autowired
     private UniversityService universityService;
 
-    @QueryMapping
+    @GetMapping
     public List<University> findAllUniversity(){
         return universityService.findAllUniversity();
     }
 
-    @MutationMapping
-    public University createUniversity(@Argument University university){
+    @PostMapping
+    public University createUniversity(@RequestBody University university){
         return universityService.createUniversity(university);
     }
 }
