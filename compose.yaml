@@ -2,17 +2,35 @@ version: '3.8'
 
 services:
   db:
-    image: mysql
+    image: mysql:9.4
     restart: always
     environment:
       MYSQL_DATABASE: ModuleManual
       MYSQL_ROOT_PASSWORD: 123456789
     ports:
       - "3307:3306"
+    healthcheck:
+      test: [ "CMD", "mysqladmin", "ping", "-h", "localhost" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - backend
 
   web:
     build: .
     ports:
       - "8086:8080"
     depends_on:
-      - db
+      db:
+        condition: service_healthy
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/ModuleManual?createDatabaseIfNotExist=true
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: 123456789
+    networks:
+      - backend
+
+networks:
+  backend:
+    driver: bridge

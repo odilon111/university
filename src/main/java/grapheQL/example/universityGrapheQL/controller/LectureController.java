@@ -19,24 +19,25 @@ public class LectureController {
     @Autowired
     LectureService lectureService;
 
-    @GetMapping
+    @GetMapping("/alls")
     public List<Lecture> findAllLecture(){
+
         return lectureService.findAllLecture();
     }
 
-    @PostMapping("/teacherId")
+    @PostMapping("/{teacherId}")
     public Lecture createLecture(@PathVariable int teacherId, @RequestBody Lecture lecture){
 
         return lectureService.createLecture(teacherId,lecture);
 
     }
 
-    @GetMapping
+    @GetMapping("/semester")
     public List<Lecture> getAllLectureBySemester(@RequestBody Semester semester){
         return lectureService.getAllLectureBySemester(semester);
     }
 
-    @GetMapping("/all")
+    @GetMapping("/all/teacher")
     public List<Lecture> getAllLectureByTeacher(@RequestBody Teacher teacher){
         return lectureService.getAllLectureByTeacher(teacher);
     }
